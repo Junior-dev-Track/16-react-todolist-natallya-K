@@ -1,11 +1,16 @@
 import React, { useRef } from "react";
 
-function Form() {
+function Form({ addTodo }) {
+  //Add addTodo as a prop
   const inputRef = useRef();
-  function handleSubmit() {
+  function handleSubmit(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
     const inputElement = inputRef.current;
-    //Do Something with inputElement
-    console.log(inputElement.value);
+    const newTodo = inputElement.value.trim(); // Get the value of the input field and trim any leading or trailing whitespace
+    if (newTodo !== "") {
+      addTodo(newTodo); // Call the addTodo function passed as a prop with the newTodo value
+      inputElement.value = ""; // Clear the input field
+    }
   }
 
   return (

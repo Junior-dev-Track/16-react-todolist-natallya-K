@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 
-function ToDoList() {
-  const initialTodos = [
-    { title: "My first todo", id: 0, completed: false },
-    { title: "My second todo", id: 1, completed: false },
-    { title: "My third todo", id: 2, completed: true },
-  ];
-
-  const [todos, setTodos] = useState(initialTodos);
-
+function ToDoList({ todos, addTodo, setTodos }) {
   const handleToggle = (id) => {
     setTodos(
       todos.map((todo) => {
@@ -37,7 +28,7 @@ function ToDoList() {
                   type="checkbox"
                   id={todo.id}
                   name={todo.title}
-                  checked={todo.completed}
+                  checked={todo.done}
                   onChange={() => handleToggle(todo.id)}
                 />
                 {todo.title}
