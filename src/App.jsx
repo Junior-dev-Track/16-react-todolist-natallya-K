@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import ToDoList from "./ToDoList.jsx";
 import Form from "./Form.jsx";
 
-function App() {
-  const [todos, setTodos] = useState([]);
+const LSKEY = "MyTodoApp";
 
-  const addTodo = (newTodo) => {
-    setTodos([...todos, { title: newTodo, id: Date.now(), done: false }]);
-  };
+function App() {
+  // Initialize the state with the value retrieved from localStorage
+  const initialTodos =
+    JSON.parse(window.localStorage.getItem("MyTodoApp.todos")) || [];
+  const [todos, setTodos] = useState(initialTodos);
+
+  // Add a todo to the state
+  function addTodo(newTodo) {
+    setTodos([...todos, { id: uuidv4(), title: newTodo, done: false }]);
+  }
+
+  // Save todos to localStorage
+  useEffect(() => {
+    window.localStorage.setItem("MyTodoApp.todos", JSON.stringify(todos));
+  }, [todos]); // Add todos to the dependency array
+
   return (
     <div className="body">
       <h1>My ToDo App</h1>

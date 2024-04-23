@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./index.css";
 
 function ToDoList({ todos, addTodo, setTodos }) {
+  // Handle checkbox status
   const handleToggle = (id) => {
     setTodos(
       todos.map((todo) => {
