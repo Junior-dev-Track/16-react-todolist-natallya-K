@@ -26,6 +26,10 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
   }
 
+  function deleteCompletedTodos() {
+    setTodos(todos.filter((todo) => !todo.done));
+  }
+
   // Calculate the number of unchecked to-do items
   const todosLeft = todos.filter((todo) => !todo.done).length;
 
@@ -40,6 +44,8 @@ function App() {
         deleteTask={deleteTask} // Pass deleteTask function as a prop
       />
       <p>Number of todos left: {todosLeft}</p> {/* Display the counter */}
+      <button onClick={deleteCompletedTodos}>Delete All Completed</button>{" "}
+      {/* Add this button */}
     </div>
   );
 }
