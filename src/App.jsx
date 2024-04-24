@@ -21,11 +21,25 @@ function App() {
     window.localStorage.setItem("MyTodoApp.todos", JSON.stringify(todos));
   }, [todos]); // Add todos to the dependency array
 
+  // Delete todos from localStorage
+  function deleteTask(id) {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  }
+
+  // Calculate the number of unchecked to-do items
+  const todosLeft = todos.filter((todo) => !todo.done).length;
+
   return (
     <div className="body">
       <h1>My ToDo App</h1>
       <Form addTodo={addTodo} /> {/* Pass addTodo function as a prop */}
-      <ToDoList todos={todos} addTodo={addTodo} setTodos={setTodos} />
+      <ToDoList
+        todos={todos}
+        addTodo={addTodo}
+        setTodos={setTodos}
+        deleteTask={deleteTask} // Pass deleteTask function as a prop
+      />
+      <p>Number of todos left: {todosLeft}</p> {/* Display the counter */}
     </div>
   );
 }

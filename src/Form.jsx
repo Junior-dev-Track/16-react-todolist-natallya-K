@@ -13,6 +13,10 @@ function Form({ addTodo }) {
     }
   }
 
+  // Delete todos from localStorage
+  function deleteTask(id) {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  }
   return (
     <>
       <form onSubmit={handleSubmit}>

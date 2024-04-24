@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
 
-function ToDoList({ todos, addTodo, setTodos }) {
+function ToDoList({ todos, addTodo, setTodos, deleteTask }) {
   // Handle checkbox status
   const handleToggle = (id) => {
     setTodos(
@@ -15,6 +15,11 @@ function ToDoList({ todos, addTodo, setTodos }) {
         return todo;
       })
     );
+  };
+
+  // Delete task function
+  const handleDelete = (id) => {
+    deleteTask(id); // Call deleteTask function passed as a prop
   };
 
   return (
@@ -32,7 +37,14 @@ function ToDoList({ todos, addTodo, setTodos }) {
                   checked={todo.done}
                   onChange={() => handleToggle(todo.id)}
                 />
-                {todo.title}
+                {todo.title}{" "}
+                <button
+                  className="delete-button"
+                  onClick={() => deleteTask(todo.id)}
+                  disabled={!todo.done} // Disable the button if the to-do item is not checked
+                >
+                  Delete
+                </button>
               </li>
             ))}
           </ul>
